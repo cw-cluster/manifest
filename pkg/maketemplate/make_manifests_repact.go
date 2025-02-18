@@ -10,10 +10,6 @@ import (
 	_ "gopkg.in/yaml.v2"
 )
 
-type TemplateData struct {
-	Values map[string]interface{}
-}
-
 type ManifestConstructor struct {
 	InputPath    string
 	OutputDir    string
