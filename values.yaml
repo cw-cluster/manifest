@@ -1,0 +1,12 @@
+template: template/java8/
+branch: dev
+
+name: sample-service-api
+replicas: 1
+labels:
+  app: sample-service-api
+image:
+  repository: myrepo/myapp
+ports:
+  name: sample-api-prt
+  containerport: 8080
