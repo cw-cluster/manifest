@@ -17,19 +17,21 @@ type TemplateData struct {
 type ManifestConstructor struct {
 	InputPath    string
 	OutputDir    string
+	ManifestName string
 	templateData *TemplateData
 }
 
-func NewManifestConstructor(inputFile, outputDir string, templateData *TemplateData) *ManifestConstructor {
+func NewManifestConstructor(inputFile, outputDir, manifestName string, templateData *TemplateData) *ManifestConstructor {
 	return &ManifestConstructor{
 		InputPath:    inputFile,
 		OutputDir:    outputDir,
 		templateData: templateData,
+		ManifestName: manifestName,
 	}
 }
 
 func (mc *ManifestConstructor) RenderManifest() error {
-	tmplData, err := os.ReadFile(mc.InputPath + manifest)
+	tmplData, err := os.ReadFile(mc.InputPath + mc.ManifestName)
 	if err != nil {
 		fmt.Println("Error reading template file:", err)
 		return err
@@ -42,7 +44,7 @@ func (mc *ManifestConstructor) RenderManifest() error {
 	}
 
 	var rendered bytes.Buffer
-	err = tmpl.Execute(&rendered, t)
+	err = tmpl.Execute(&rendered, mc.templateData)
 	if err != nil {
 		fmt.Println("Error executing template:", err)
 		return err
