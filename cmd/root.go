@@ -4,8 +4,6 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-	"manifest/pkg/maketemplate"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -21,12 +19,10 @@ examples and usage of using your application. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Args: cobra.ExactArgs(1),
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		maketemplate.MakeManifest(args[0])
-		fmt.Println("Sucessfully make manifest")
+		cmd.Help()
 	},
 }
 

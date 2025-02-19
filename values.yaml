@@ -1,6 +1,5 @@
 template: template/java8/
 branch: dev
-
 name: sample-service-api
 replicas: 1
 labels:
