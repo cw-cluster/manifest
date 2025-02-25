@@ -4,7 +4,6 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"manifest/pkg/makeManifest"
 
 	"github.com/spf13/cobra"
@@ -20,7 +19,6 @@ var initCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		v, _ := cmd.Flags().GetString("values")
 		makeManifest.MakeManifest(v, args[0])
-		fmt.Println("")
 	},
 }
 

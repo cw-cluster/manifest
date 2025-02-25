@@ -80,7 +80,7 @@ func MakeManifest(v string, b string) {
 
 	_, err := os.Stat("base")
 	if err != nil {
-		if os.IsExist(err) {
+		if !os.IsExist(err) {
 			os.Mkdir("base", 0744)
 			for _, i := range getFileList(p.basePath) {
 				d := t.renderManifest(readTmpl(p.basePath, i.Name()))
@@ -90,10 +90,9 @@ func MakeManifest(v string, b string) {
 	} else {
 		fmt.Println("base already exists")
 	}
-
 	_, err = os.Stat("overlay/" + b)
 	if err != nil {
-		if os.IsExist(err) {
+		if !os.IsExist(err) {
 			os.MkdirAll("overlay/dev", 0744)
 			for _, i := range getFileList(p.overlayPath) {
 				d := t.renderManifest(readTmpl(p.overlayPath, i.Name()))
