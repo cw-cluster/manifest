@@ -12,7 +12,6 @@ import (
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
-<<<<<<< HEAD
 	Use: `init <branch>
   ex) manifest init dev`,
 	Short: "A brief description of your command",
@@ -23,20 +22,6 @@ var initCmd = &cobra.Command{
 		v, _ := cmd.Flags().GetString("values")
 		makeManifest.MakeManifest(v, args[0])
 		fmt.Println("")
-=======
-	Use:   "init",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Args: cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		makeManifest.MakeManifest(args[0])
-		fmt.Println("Sucessfully make manifest")
->>>>>>> refs/remotes/origin/main
 	},
 }
 
@@ -52,8 +37,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// initCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-<<<<<<< HEAD
 	initCmd.Flags().String("values", "./values.yaml", "path for values.yaml")
-=======
->>>>>>> refs/remotes/origin/main
 }
