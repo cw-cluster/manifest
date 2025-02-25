@@ -1,9 +1,4 @@
 template: template/java8/
-<<<<<<< HEAD
-
-=======
-branch: dev
->>>>>>> refs/remotes/origin/main
 name: sample-service-api
 replicas: 1
 labels:

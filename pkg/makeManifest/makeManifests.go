@@ -30,11 +30,6 @@ func (t *templateData) renderManifest(tmplData []byte) bytes.Buffer {
 		fmt.Println("Error executing template:", err)
 		panic(err)
 	}
-
-	// err = os.WriteFile("base/"+manifest, rendered.Bytes(), 0644)
-	// if err != nil {
-	// 	fmt.Println("Error Create Yaml:", err)
-	// }
 	return rendered
 }
 
@@ -53,6 +48,7 @@ func (t *templateData) loadValuesData() {
 	}
 }
 
+// Get Template File lists
 func getFileList(s string) []fs.DirEntry {
 	flist, err := os.ReadDir(s)
 	if err != nil {
