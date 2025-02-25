@@ -77,21 +77,35 @@ func NewTemplateDataConstructor(inputPath string) *templateData {
 	}
 }
 
-func MakeManifest(v string) {
+func MakeManifest(v string, b string) {
 	t := NewTemplateDataConstructor(v)
 	t.loadValuesData()
 	p := NewTempldatePathConstructor(t.Values["template"].(string))
 
-	os.Mkdir("base", 0744)
-
-	os.MkdirAll("overlay/dev", 0744)
-	for _, i := range getFileList(p.basePath) {
-		d := t.renderManifest(readTmpl(p.basePath, i.Name()))
-		os.WriteFile("base/"+i.Name(), d.Bytes(), 0744)
+	_, err := os.Stat("base")
+	if err != nil {
+		if os.IsExist(err) {
+			os.Mkdir("base", 0744)
+			for _, i := range getFileList(p.basePath) {
+				d := t.renderManifest(readTmpl(p.basePath, i.Name()))
+				os.WriteFile("base/"+i.Name(), d.Bytes(), 0744)
+			}
+		}
+	} else {
+		fmt.Println("base already exists")
 	}
 
-	for _, i := range getFileList(p.overlayPath) {
-		d := t.renderManifest(readTmpl(p.overlayPath, i.Name()))
-		os.WriteFile("overlay/dev/"+i.Name(), d.Bytes(), 0744)
+	_, err = os.Stat("overlay/" + b)
+	if err != nil {
+		if os.IsExist(err) {
+			os.MkdirAll("overlay/dev", 0744)
+			for _, i := range getFileList(p.overlayPath) {
+				d := t.renderManifest(readTmpl(p.overlayPath, i.Name()))
+				os.WriteFile("overlay/"+b+"/"+i.Name(), d.Bytes(), 0744)
+			}
+		}
+	} else {
+		fmt.Println("overlay/" + b + " already exists")
 	}
+
 }
