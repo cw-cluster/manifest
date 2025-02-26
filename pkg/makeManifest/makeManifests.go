@@ -93,7 +93,7 @@ func MakeManifest(v string, b string) {
 	_, err = os.Stat("overlay/" + b)
 	if err != nil {
 		if !os.IsExist(err) {
-			os.MkdirAll("overlay/dev", 0744)
+			os.MkdirAll("overlay/"+b, 0744)
 			for _, i := range getFileList(p.overlayPath) {
 				d := t.renderManifest(readTmpl(p.overlayPath, i.Name()))
 				os.WriteFile("overlay/"+b+"/"+i.Name(), d.Bytes(), 0744)
